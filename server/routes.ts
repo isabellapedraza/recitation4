@@ -2,7 +2,7 @@ import { Filter, ObjectId } from "mongodb";
 
 import { Router, getExpressRouter } from "./framework/router";
 
-import { Post, User, WebSession } from "./app";
+import { Label, Post, User, WebSession } from "./app"; // Note: we added these to help you finish TODO 4 quickly, but remember to do this! 
 import { PostDoc } from "./concepts/post";
 import { UserDoc } from "./concepts/user";
 import { WebSessionDoc } from "./concepts/websession";
@@ -11,7 +11,7 @@ class Routes {
   @Router.get("/session")
   async getSessionUser(session: WebSessionDoc) {
     const user = WebSession.getUser(session);
-    return await User.getById(user);
+    return await User.getUserById(user);
   }
 
   @Router.get("/users")
@@ -64,8 +64,35 @@ class Routes {
   async deletePost(session: WebSessionDoc, _id: ObjectId) {
     // TODO 3: Delete the post with given _id
     // Make sure the user deleting is the author of the post
-    throw new Error("Not implemented!");
+    
+    //Solution 
+    const user = WebSession.getUser(session);
+    await Post.isAuthor(user, _id);
+    return Post.delete(_id);
   }
+
+  // TODO 4: How can we add routes to test our label concept? 
+
+  @Router.get("/labels")
+  async getLabels(session: WebSessionDoc) {
+    const user = WebSession.getUser(session);
+    return await Label.read(user);
+  }
+
+  @Router.post("/labels")
+  async createLabel(session: WebSessionDoc, label: string) {
+    const user = WebSession.getUser(session);
+    return await Label.create(user, label);
+  }
+
+  @Router.delete("/labels/:_id")
+  async deleteLabel(session: WebSessionDoc, _id: ObjectId) {
+    const user = WebSession.getUser(session);
+    await Label.isCreator(user, _id);
+    return Label.delete(_id);
+  }
+
+
 }
 
 export default getExpressRouter(new Routes());
