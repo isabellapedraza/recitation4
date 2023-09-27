@@ -5,10 +5,6 @@ import { NotAllowedError, NotFoundError } from "./errors";
 export interface LabelDoc extends BaseDoc {
   // TODO 1: What should the structure of our Label concept look like?
   // Hint: what do we need to keep track of when using labels?
-
-  label: string; 
-  creator: ObjectId;
-  item: ObjectId;
 }
 
 export default class LabelConcept {
@@ -22,16 +18,9 @@ export default class LabelConcept {
     async read(creator: ObjectId) {
       // TODO 2: How could we get only the labels created by a specific user?
 
-      // const labels = await this.labels.readMany({creator});
-      // return { msg: "Here are your labels!", labels };
 
       // TODO 3: How could we get all the labels in alphabetical order?
       // Hint: does sorting in an ascending fashion or descending fashion make more sense?
-      
-      const labels = await this.labels.readMany({creator}, {
-        sort: { label: 1 },
-      });
-      return { msg: "Here are your labels!", labels };
 
     }
   
