@@ -1,4 +1,4 @@
-# 6.1040 Prep (Based on Backend starter code)
+# 6.1040 Recitation 4 (Based on Backend starter code)
 
 ## Setup
 
@@ -24,17 +24,9 @@ To run the server, you need to create a MongoDb Atlas instance and connect your 
     ```
     to the `.env` file. 
 
-__Congrats!__ You're ready to run locally! Don't hesitate to reach out if you run into issues. 
+__Congrats!__ You're ready to run locally! Don't hesitate to reach out if you run into issues.  
 
-### Learn how we use MongoDB
-
-To understand how to perform different CRUD operations on your MongoDB database, read `server/framework/doc.ts`, which is a simple wrapper around the native driver. You will use these functions to help you solve the `TODOs` for this prep.
-
-Read MongoDB's documentation on [fundamental CRUD operations](https://www.mongodb.com/docs/drivers/node/current/fundamentals/crud/) to see how filters and queries work.
-
-Read [how to filter](https://docs.google.com/document/d/1YRxLBDZwvQLtbkWEzvGb0DaWwfHoSkHUtJ60VYRhjaY/edit?usp=sharing) on MongoDB.  
-
-## Complete the TODOs in `server/concepts/user.ts` and `server/routes.ts`
+## Complete the TODOs in `server/concepts/label.ts` and `server/routes.ts` and `public/utils.ts`
 
 Feel free to edit anything besides framework as long as you maintain concept modularity. 
 
