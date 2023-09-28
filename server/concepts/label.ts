@@ -5,22 +5,26 @@ import { NotAllowedError, NotFoundError } from "./errors";
 export interface LabelDoc extends BaseDoc {
   // TODO 1: What should the structure of our Label concept look like?
   // Hint: what do we need to keep track of when using labels?
+
+  label: string; 
+  creator: ObjectId;
+  items: Array<ObjectId>;
+
 }
 
 export default class LabelConcept {
   public readonly labels = new DocCollection<LabelDoc>("labels");
   
-    async create(creator: ObjectId, label: string) {
-      const _id = await this.labels.createOne({ label, creator });
+    async create(creator: ObjectId, label: string, items: Array<ObjectId>) {
+      const _id = await this.labels.createOne({ label, creator, items});
       return { msg: "Label successfully created!", label: await this.labels.readOne({ _id }) };
     }
 
     async read(creator: ObjectId) {
       // TODO 2: How could we get only the labels created by a specific user?
 
-
-      // TODO 3: How could we get all the labels in alphabetical order?
-      // Hint: does sorting in an ascending fashion or descending fashion make more sense?
+      const labels = await this.labels.readMany({creator});
+      return { msg: "Here are your labels!", labels };
 
     }
   

@@ -2,7 +2,7 @@ import { Filter, ObjectId } from "mongodb";
 
 import { Router, getExpressRouter } from "./framework/router";
 
-import { Post, User, WebSession } from "./app"; // Note: we added these to help you finish TODO 4 quickly, but remember to do this! 
+import { Label, Post, User, WebSession } from "./app"; // Note: we added these to help you finish TODO 4 quickly, but remember to do this! 
 import { PostDoc } from "./concepts/post";
 import { UserDoc } from "./concepts/user";
 import { WebSessionDoc } from "./concepts/websession";
@@ -72,6 +72,25 @@ class Routes {
   }
 
   // TODO 4: How can we add routes to test our label concept? 
+
+  @Router.get("/labels")
+  async getLabels(session: WebSessionDoc) {
+    const user = WebSession.getUser(session);
+    return await Label.read(user);
+  }
+
+  @Router.post("/labels")
+  async createLabel(session: WebSessionDoc, label: string) {
+    const user = WebSession.getUser(session);
+    return await Label.create(user, label, []);
+  }
+
+  @Router.delete("/labels/:_id")
+  async deleteLabel(session: WebSessionDoc, _id: ObjectId) {
+    const user = WebSession.getUser(session);
+    await Label.isCreator(user, _id);
+    return Label.delete(_id);
+  }
 
 
 }

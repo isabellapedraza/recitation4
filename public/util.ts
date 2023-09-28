@@ -56,6 +56,25 @@ const operations = [
 
   // TODO 5: How can we edit the testing client to test our label concept? 
   
+  {
+    name: "Get Labels",
+    endpoint: "/api/labels",
+    method: "GET",
+    fields: {},
+  },
+  {
+    name: "Create Label", 
+    endpoint: "/api/labels",
+    method: "POST",
+    fields: { label: "textarea" },
+  },
+  {
+    name: "Delete Label",
+    endpoint: "/api/labels/:id",
+    method: "DELETE",
+    fields: { id: "input" },
+  },
+  
 ];
 
 type HttpMethod = "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
